@@ -1,36 +1,33 @@
-const n1 = [];
-let n2 = [];
-var r = []
+function leftRotationArray(tmpArr, rotation){
+  let arr = [];
+  let newArray = [];
+  let lastIndex = 0;
 
-function rotate(arr, rotations) {
-  for(let l = 1; l<=arr; l++) {
-    n1.push(l);
+  // Creating Array from the given input: tmpArr
+  for(let i = 1; i<=tmpArr; i++){
+    arr.push(i);
   }
+  console.log('Original Arr',arr)
 
-  console.log('Original Array', n1)
+  // Repeating Rotations by 1 according to user input: rotation
+  for(i = 1; i<=rotation; i++) {
 
-  n2 = [...n1];
-
-  for (let s = 1; s <= rotations; s++) {
-    r = [...n2]
-
-    for (let i = n2.length - 1; i >= 0; i--) {
-      let tempIn = r[i - 1];
-
-      if (tempIn == r[-1]) {
-        tempR = r.lastIndexOf(n2[r.length - 1]);
-        r[tempR] = n2[i]
-
+    newArray = [...arr];
+    
+    // Assigning the rotated values of arr to newArray
+    for(let j = newArray.length - 1; j >= 0; j--){
+      if(newArray[j-1] >= 0) {
+        newArray[j-1] = arr[j];
       } else {
-        r[i - 1] = n2[i]
+        lastIndex = newArray.length-1; 
+        newArray[lastIndex] = arr[0];
       }
     }
-    n2 = r;
+    console.log('Rotation ',i ,newArray)
+    arr = [...newArray];
   }
-
 }
 
-
-rotate(6,2);
-
-console.log('After Rotation ', r)
+// 1st Parameter is length of the Array
+// 2nd Parameter is the rotations to the left
+leftRotationArray(5, 2);
